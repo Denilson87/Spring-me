@@ -41,6 +41,6 @@ public class ParkingSpotService {
     }
 
     public void delete(ParkingSpotModel parkingSpotModel) {
-        return parkingSpotRepository.delete();
+        parkingSpotRepository.delete(parkingSpotModel);
     }
 }
