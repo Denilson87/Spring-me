@@ -80,7 +80,6 @@ public class ParkingSpotController {
         parkingSpotModel.setId(parkingSpotModelOptional.get().getId());
         parkingSpotModel.setRegistrationDate(parkingSpotModelOptional.get().getRegistrationDate());
         return ResponseEntity.status(HttpStatus.OK).body(parkingSpotService.save(parkingSpotModel));
-
     }
 
 
