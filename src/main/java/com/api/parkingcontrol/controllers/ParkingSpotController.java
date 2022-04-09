@@ -48,7 +48,7 @@ public class ParkingSpotController {
 
     @GetMapping
     public ResponseEntity<List<ParkingSpotModel>> getAllParkingSpots(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
-        return ResponseEntity.status(HttpStatus.OK).body(parkingSpotService.findAll());
+        return ResponseEntity.status(HttpStatus.OK).body(parkingSpotService.findAll(pageable));
     }
 
     @GetMapping("/{id}")
