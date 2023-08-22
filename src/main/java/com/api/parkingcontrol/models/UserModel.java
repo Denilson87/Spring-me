@@ -1,13 +1,13 @@
 package com.api.parkingcontrol.models;
 
 
-
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -26,7 +26,7 @@ public class UserModel implements UserDetails {
     private String password;
 
     @Column(nullable = false, unique = true, length = 50)
-    private String role;
+    private UserRole role;
 
     public UUID getId() {
         return id;
@@ -66,7 +66,8 @@ public class UserModel implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority(role:"ROLE_ADMIN"), new SimpleGrantedAuthority(role:"ROLE_USER"));
+         else return List.of(new SimpleGrantedAuthority(role:"ROLE_USER"));
     }
 
     public String getPassword() {
@@ -77,11 +78,11 @@ public class UserModel implements UserDetails {
         this.password = password;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
